@@ -1,15 +1,20 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
-    <id>com.github.mikiloz92.yewintellijplugin</id>
-    <name>yew-intellij-plugin</name>
+    <id>com.github.mikiloz92.eosintellijplugin</id>
+    <name>Yew HTML Support</name>
     <vendor>mikiloz92</vendor>
 
     <depends>com.intellij.modules.platform</depends>
-
-    <resource-bundle>messages.MyBundle</resource-bundle>
+    <depends>com.intellij.gradle</depends>
+    <depends>com.intellij.java</depends>
+    <depends>org.jetbrains.plugins.gradle</depends>
+    <depends>org.jetbrains.plugins.gradle.java</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <toolWindow factoryClass="com.github.mikiloz92.yewintellijplugin.toolWindow.MyToolWindowFactory" id="MyToolWindow"/>
-        <postStartupActivity implementation="com.github.mikiloz92.yewintellijplugin.startup.MyProjectActivity" />
+        <treeStructureProvider
+                implementation="com.github.mikiloz92.eosintellijplugin.WeightedTreeStructureProvider"
+                order="last"
+        />
+        <projectViewNodeDecorator implementation="com.github.mikiloz92.eosintellijplugin.CargoProjectDecorator"/>
     </extensions>
 </idea-plugin>

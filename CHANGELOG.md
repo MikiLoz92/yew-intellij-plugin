@@ -1,6 +1,6 @@
 <!-- Keep a Changelog guide -> https://keepachangelog.com -->
 
-# yew-intellij-plugin Changelog
+# eos-intellij-plugin Changelog
 
 ## [Unreleased]
 ### Added
