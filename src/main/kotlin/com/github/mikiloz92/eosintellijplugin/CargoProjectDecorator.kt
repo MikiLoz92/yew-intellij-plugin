@@ -61,6 +61,27 @@ class CargoProjectDecorator : ProjectViewNodeDecorator {
         val isRootLevel = (parent == null || parent.name == project.name)
 
 
+        // Mark Rust source/test roots inside a Cargo package
+        if (file.name == "src" || file.name == "tests") {
+            val ownerDir = parent
+            if (ownerDir != null) {
+                val ownerCargoToml = ownerDir.findChild("Cargo.toml")
+                if (ownerCargoToml != null && !ownerCargoToml.isDirectory) {
+                    when (file.name) {
+                        "src" -> {
+                            data.setIcon(AllIcons.Modules.SourceRoot)
+                            return
+                        }
+                        "tests" -> {
+                            data.setIcon(AllIcons.Modules.TestRoot)
+                            return
+                        }
+                    }
+                }
+            }
+        }
+
+
         val isRootLevelBuildLogic = file.name == "build-logic" && (parent == null || parent.name == project.name)
         if (isRootLevelBuildLogic) {
             data.setIcon(buildLogicFolderIcon)
